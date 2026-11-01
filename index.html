@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Skill Threat Scan</title>
+  <link rel="stylesheet" href="web/style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>AI Skill Threat Scan</h1>
+      <p class="sub">SKILL.md, MCP tool 정의, tool 소스를 설치 전에 정적 휴리스틱으로 점검합니다</p>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="panel input" aria-label="입력">
+      <div class="row">
+        <input id="url" type="url" placeholder="GitHub blob 또는 raw 파일 URL" autocomplete="off" />
+        <button id="fetch" class="ghost">불러오기</button>
+      </div>
+      <div class="row samples" id="samples">
+        <span class="muted">예제</span>
+      </div>
+      <textarea id="src" spellcheck="false" placeholder="검사할 SKILL.md, MCP tool definition, 소스 코드를 붙여넣거나 파일을 끌어다 놓으세요"></textarea>
+      <div class="row between">
+        <label class="ghost file">
+          파일 열기
+          <input id="file" type="file" hidden />
+        </label>
+        <span id="status" class="muted" role="status"></span>
+        <div class="row">
+          <button id="clear" class="ghost">지우기</button>
+          <button id="scan" class="primary">스캔</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel result" id="result" aria-live="polite" hidden>
+      <div class="summary">
+        <div class="score">
+          <span id="score">0</span><small>/100</small>
+        </div>
+        <div>
+          <span id="severity" class="badge">Low</span>
+          <p id="breakdown" class="muted"></p>
+        </div>
+        <button id="export" class="ghost right">JSON 내보내기</button>
+      </div>
+
+      <h2>위협 family</h2>
+      <ol id="families" class="families"></ol>
+
+      <h2>탐지 근거</h2>
+      <div id="findings"></div>
+
+      <p class="note">
+        점수는 규칙 가중치로 계산한 heuristic indicator이며 악성 확률이 아닙니다.
+        Low도 안전 인증이 아니고, 위험 패턴을 설명만 하는 문서에서 오탐이 날 수 있습니다.
+      </p>
+    </section>
+  </main>
+
+  <footer class="wrap muted foot" id="foot"></footer>
+
+  <script src="src/taxonomy.js"></script>
+  <script src="src/rules.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="src/samples.js"></script>
+  <script src="web/app.js"></script>
+</body>
+</html>

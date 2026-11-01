@@ -1,0 +1,17 @@
+{
+  "name": "ai-skill-threat-scan",
+  "version": "0.1.0",
+  "description": "Install-time static threat scanner for AI Agent Skills and MCP tool definitions (research MVP)",
+  "private": true,
+  "bin": {
+    "skill-scan": "bin/scan.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "scan": "node bin/scan.js",
+    "serve": "python3 -m http.server 8080"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,660 @@
+{
+  "version": "0.1",
+  "note": "implemented는 검증된 detector가 있는지를 뜻한다. heuristic_rules는 관련 신호를 잡는 정적 규칙일 뿐 탐지 성능이 검증된 것이 아니다. label 문구와 개수는 원문 대조(P0)가 필요하다.",
+  "papers": {
+    "ASB": {
+      "title": "Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents",
+      "venue": "ICLR 2025",
+      "url": "https://openreview.net/forum?id=V4y0CpX4hK",
+      "verified": false
+    },
+    "MCPSecBench": {
+      "title": "MCPSecBench: A Systematic Security Benchmark and Playground for Testing Model Context Protocols",
+      "venue": "arXiv:2508.13220",
+      "url": "https://arxiv.org/abs/2508.13220",
+      "verified": false
+    },
+    "MalTool": {
+      "title": "MalTool: Malicious Tool Attacks on LLM Agents",
+      "venue": "arXiv:2602.12194",
+      "url": "https://arxiv.org/abs/2602.12194",
+      "verified": false
+    }
+  },
+  "service_extensions": [
+    {
+      "id": "service-extension:T4",
+      "family_ids": [
+        "T4"
+      ],
+      "label": "Privilege & access-control abuse (서비스 측 확장)"
+    },
+    {
+      "id": "service-extension:T10",
+      "family_ids": [
+        "T10"
+      ],
+      "label": "Observability & governance gaps (서비스 측 확장)"
+    }
+  ],
+  "mappings": [
+    {
+      "source_paper": "ASB",
+      "source_attack_id": "DPI",
+      "source_attack_label": "Direct Prompt Injection",
+      "family_ids": [
+        "T1"
+      ],
+      "attack_surface": "user prompt / agent context",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R01"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "ASB",
+      "source_attack_id": "IPI",
+      "source_attack_label": "Indirect Prompt Injection",
+      "family_ids": [
+        "T1"
+      ],
+      "attack_surface": "tool response / external content",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R01"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "ASB",
+      "source_attack_id": "memory-poisoning",
+      "source_attack_label": "Memory Poisoning",
+      "family_ids": [
+        "T8",
+        "T1"
+      ],
+      "attack_surface": "agent memory / RAG store",
+      "detectability": [
+        "semantic",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R12"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "ASB",
+      "source_attack_id": "PoT",
+      "source_attack_label": "Plan-of-Thought Backdoor",
+      "family_ids": [
+        "T1",
+        "T9"
+      ],
+      "attack_surface": "system prompt / planning",
+      "detectability": [
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R02"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "ASB",
+      "source_attack_id": "mixed",
+      "source_attack_label": "Mixed Attack",
+      "family_ids": [
+        "T1",
+        "T8",
+        "T9"
+      ],
+      "attack_surface": "multiple",
+      "detectability": [
+        "semantic",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R14"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-1",
+      "source_attack_label": "Prompt Injection",
+      "family_ids": [
+        "T1"
+      ],
+      "attack_surface": "client",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R01"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-2",
+      "source_attack_label": "Tool/Service Misuse via \"Confused AI\"",
+      "family_ids": [
+        "T9",
+        "T4"
+      ],
+      "attack_surface": "client",
+      "detectability": [
+        "semantic",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R07",
+        "R14"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-3",
+      "source_attack_label": "Schema Inconsistencies",
+      "family_ids": [
+        "T8",
+        "T1"
+      ],
+      "attack_surface": "protocol",
+      "detectability": [
+        "static"
+      ],
+      "heuristic_rules": [
+        "R02",
+        "R13"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-4",
+      "source_attack_label": "Slash Command Overlap",
+      "family_ids": [
+        "T9",
+        "T2"
+      ],
+      "attack_surface": "client",
+      "detectability": [
+        "static"
+      ],
+      "heuristic_rules": [
+        "R14"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-5",
+      "source_attack_label": "MCP Rebinding",
+      "family_ids": [
+        "T6"
+      ],
+      "attack_surface": "protocol",
+      "detectability": [
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R10"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-6",
+      "source_attack_label": "Man-in-the-Middle",
+      "family_ids": [
+        "T6"
+      ],
+      "attack_surface": "protocol",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R10"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-7",
+      "source_attack_label": "Tool Shadowing Attack",
+      "family_ids": [
+        "T2",
+        "T1"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R04"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-8",
+      "source_attack_label": "Data Exfiltration",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R06"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-9",
+      "source_attack_label": "Package Name Squatting (tool name)",
+      "family_ids": [
+        "T2"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "registry"
+      ],
+      "heuristic_rules": [
+        "R04"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-10",
+      "source_attack_label": "Indirect Prompt Injection",
+      "family_ids": [
+        "T1"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R01"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-11",
+      "source_attack_label": "Package Name Squatting (server name)",
+      "family_ids": [
+        "T2"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "registry"
+      ],
+      "heuristic_rules": [
+        "R04"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-12",
+      "source_attack_label": "Tool Poisoning",
+      "family_ids": [
+        "T1"
+      ],
+      "attack_surface": "tool description/manifest",
+      "detectability": [
+        "static",
+        "semantic"
+      ],
+      "heuristic_rules": [
+        "R02"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-13",
+      "source_attack_label": "Rug Pull Attack",
+      "family_ids": [
+        "T2"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "version-diff"
+      ],
+      "heuristic_rules": [
+        "R03"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-14",
+      "source_attack_label": "Vulnerable Client",
+      "family_ids": [
+        "T4",
+        "T5"
+      ],
+      "attack_surface": "client",
+      "detectability": [
+        "dynamic"
+      ],
+      "heuristic_rules": [],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-15",
+      "source_attack_label": "Configuration Drift",
+      "family_ids": [
+        "T8"
+      ],
+      "attack_surface": "host",
+      "detectability": [
+        "static",
+        "version-diff"
+      ],
+      "heuristic_rules": [
+        "R13"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-16",
+      "source_attack_label": "Sandbox Escape",
+      "family_ids": [
+        "T5",
+        "T4"
+      ],
+      "attack_surface": "host",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R08",
+        "R09"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MCPSecBench",
+      "source_attack_id": "ATT-17",
+      "source_attack_label": "Vulnerable Server",
+      "family_ids": [
+        "T5",
+        "T6"
+      ],
+      "attack_surface": "server",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "remote-data-exfiltration",
+      "source_attack_label": "Remote Data Exfiltration",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R06"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "local-data-exfiltration",
+      "source_attack_label": "Local Data Exfiltration",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R05"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "file-to-remote-exfiltration",
+      "source_attack_label": "File-to-Remote Exfiltration",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R06"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "environment-credential-harvesting",
+      "source_attack_label": "Environment Credential Harvesting",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R05"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "api-key-abuse",
+      "source_attack_label": "API Key Abuse",
+      "family_ids": [
+        "T3"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R05"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "malicious-database-injection",
+      "source_attack_label": "Malicious Database Injection",
+      "family_ids": [
+        "T8"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R12"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "local-file-deletion",
+      "source_attack_label": "Local File Deletion",
+      "family_ids": [
+        "T5"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R09"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "database-record-deletion",
+      "source_attack_label": "Database Record Deletion",
+      "family_ids": [
+        "T8"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R12"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "remote-program-downloading",
+      "source_attack_label": "Remote Program Downloading",
+      "family_ids": [
+        "T5",
+        "T2"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R03",
+        "R08"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "cpu-compute-hijacking",
+      "source_attack_label": "CPU Compute Hijacking",
+      "family_ids": [
+        "T7"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R11"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "gpu-compute-hijacking",
+      "source_attack_label": "GPU Compute Hijacking",
+      "family_ids": [
+        "T7"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R11"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    },
+    {
+      "source_paper": "MalTool",
+      "source_attack_id": "response-time-amplification",
+      "source_attack_label": "Response Time Amplification",
+      "family_ids": [
+        "T7"
+      ],
+      "attack_surface": "tool implementation",
+      "detectability": [
+        "static",
+        "dynamic"
+      ],
+      "heuristic_rules": [
+        "R11"
+      ],
+      "implemented": false,
+      "evaluation_case_ids": []
+    }
+  ]
+}
